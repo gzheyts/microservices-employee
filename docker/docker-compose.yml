@@ -1,0 +1,16 @@
+version: '2'
+services:
+  rest:
+    container_name: rest_container
+    build: ../microservices-employee-rest
+    image: microservices-employee-rest
+    environment:
+     - JAVA_OPTS='-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005'
+  report:
+    container_name: report_container
+    build: ../microservices-employee-report
+    image: microservices-employee-report
+    environment:
+     - JAVA_OPTS='-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005'
+    links:
+     - rest
